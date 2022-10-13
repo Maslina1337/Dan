@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    string start_string;
+    int value_of_letters = 0;
+    string ans = "";
+    
+    cout << "Введите текст письма: ";
+    cin >> start_string;
+    for (int i = 1 ; i != start_string.length(); i++) {
+        value_of_letters = 0;
+        if (start_string[i-1] == start_string[i] && start_string[i] == start_string[i+1]) {
+            value_of_letters = 3;
+            for (int j = 2; start_string[i] == start_string[i+j]; j++) {
+                value_of_letters++;
+            }
+        }
+        ans = ans + start_string[i-1];
+        cout << value_of_letters << " ";
+    }
+}

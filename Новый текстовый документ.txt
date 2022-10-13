@@ -1,0 +1,38 @@
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
+void str_to_int(string str, int start, int end, int* ans) {
+    stringstream ss;
+    ss << str[start] << str[end];
+    ss >> *ans;
+}
+
+int main() {
+    
+    string start_time;
+    int hours;
+    int minutes;
+    int reversed_hours;
+    
+    cout << "Введте время в которое пекарь поставил пирог в духовку (Пример: 21:34): ";
+    cin >> start_time;
+    str_to_int(start_time, 0, 1, &hours);
+    str_to_int(start_time, 3, 4, &minutes);
+    reversed_hours = hours / 10 + hours % 10 * 10;
+    
+    if (hours == 23 && minutes > 23) {
+        cout << "Ближайшее подходящее время для извлечения пирога: 00:00";
+    } else if (minutes <= reversed_hours && hours - 10 < 0) {
+        cout << "Ближайшее подходящее время для извлечения пирога: 0" << hours << ":" << reversed_hours;
+    } else if (minutes <= reversed_hours) {
+        cout << "Ближайшее подходящее время для извлечения пирога: " << hours << ":" << reversed_hours;
+    } else if (minutes > reversed_hours && hours - 10 < 0){
+        cout << "Ближайшее подходящее время для извлечения пирога: 0" << hours + 1 << ":" << reversed_hours + 10;
+    } else if (minutes > reversed_hours){
+        cout << "Ближайшее подходящее время для извлечения пирога: " << hours + 1 << ":" << reversed_hours + 10;
+    }
+
+    return 0;
+}
